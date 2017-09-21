@@ -50,3 +50,11 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+.idea/.name
+.idea/compiler.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+Dice_Game.iml
+
+target/

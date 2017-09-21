@@ -1,5 +1,3 @@
-import oracle.jrockit.jfr.JFR;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -20,27 +18,30 @@ public class Start {
         d1.setFont(new Font(font.getName(), Font.PLAIN, 80));
         JButton addDie = helper.createButton(30,200,100,50,"Add Die");
         addDie.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                dice.add(new Die(1,20));
+                if (dice.size() < 10){
+                    dice.add(new Die(1,20));
+                }
             }
         });
 
-
+        JButton removeDie = helper.createButton(260,200,150,50,"Remove Die");
+        removeDie.addActionListener(e -> dice.remove(dice.size()-1));
         JButton rollDice = helper.createButton(150,200,100,50,"Roll Dice");
 
-        rollDice.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                StringBuilder builder = new StringBuilder();
-                for (Die d : dice){
-                    int value = d.rollDie();
-                    builder.append(value).append("-");
-                }
-                d1.setText(builder.toString());
+        rollDice.addActionListener(e -> {
+            StringBuilder builder = new StringBuilder();
+            for (Die d : dice){
+                int value = d.rollDie();
+                builder.append(value).append("-");
             }
+            d1.setText(builder.toString());
         });
 
         f.add(addDie);//adding button in JFrame
         f.add(rollDice);//adding button in JFrame
+        f.add(removeDie);
         f.add(d1);
         f.setSize(400,500);//400 width and 500 height
         f.setLayout(null);//using no layout managers
